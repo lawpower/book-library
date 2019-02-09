@@ -1,0 +1,37 @@
+.library {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  box-sizing: border-box;
+  height: calc(100% - 80px);
+
+  &-meta {
+    padding: 8px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    button {
+      background: 0;
+      border: 0;
+      padding: 0;
+      font-size: 14px;
+      color: #004BAF;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      i {
+        margin-right: 8px;
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+
+  &-books {
+    overflow: auto;
+    margin: 0;
+    padding: 0;
+  }
+}
