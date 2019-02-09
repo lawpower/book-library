@@ -45,6 +45,8 @@
       margin: 0;
       padding: 0 0 16px 0;
       line-height: 1.3em;
+      max-height: 100px;
+      overflow: auto;
     }
 
     ul {
