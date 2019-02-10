@@ -30,7 +30,7 @@ class Book extends Component {
               </button>
             </li>
             <li className='book-action'>
-              <button className='action'>
+              <button className='action' onClick={ () => this.props.deleteBook() }>
                 <i>
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#004AAE" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/><path d="M0 0h24v24H0z" fill="none"/></svg>                          
                 </i>

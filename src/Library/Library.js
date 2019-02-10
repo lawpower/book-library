@@ -32,10 +32,12 @@ class Library extends Component {
           { this.state.books.map((book, i) => {
               return <Book 
                 key={ i }
+                id={ book.id }
                 title={ book.title } 
                 author={ book.author }  
                 description={ book.description } 
-                thumbnail={ book.thumbnail } />
+                thumbnail={ book.thumbnail }
+                deleteBook={ () => this.deleteBook(book.id) }/>
             })
           }
         </ul>
@@ -60,6 +62,17 @@ class Library extends Component {
         this.setState({ isLoaded: true, books: json })
       })
   }  
+ 
+  deleteBook(bookId) {
+    console.log(bookId);
+    fetch(`http://localhost:3000/books/${bookId}`, {
+        method: 'delete'
+      })
+      .then(() => {
+        this.getBooks();
+      })
+  }  
+
 }
 
 export default Library;
