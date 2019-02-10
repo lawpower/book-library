@@ -7,7 +7,8 @@ class Masthead extends Component {
     return (
       <header className='masthead' role='banner'>
         <h1>My Library</h1>
-        <Search />
+        <Search 
+          onSearchChanged={ (query) => this.props.onSearchChanged(query) } />
       </header>
     );
   }
