@@ -24,6 +24,16 @@
         "author": "JK Rowling",
         "description": "Dark times have come to Hogwarts. After the Dementors' attack on his cousin Dudley, Harry Potter knows that Voldemort will stop at nothing to find him. There are many who deny the Dark Lord's return, but Harry is not alone: a secret order gathers at Grimmauld Place to fight against the dark forces. Harry must allow Professor Snape to teach him how to protect himself from Voldemort's savage assaults on his mind. But they are growing stronger by the day and Harry is running out of time....",
         "thumbnail": "https://images-na.ssl-images-amazon.com/images/I/51-zRYQweBL.jpg"
-      }
+    }, {
+        "title": "Harry Potter and the Half-Blood Prince",
+        "author": "JK Rowling",
+        "description": "When Dumbledore arrives at Privet Drive one summer night to collect Harry Potter, his wand hand is blackened and shrivelled, but he does not reveal why. Secrets and suspicion are spreading through the wizarding world, and Hogwarts itself is not safe. Harry is convinced that Malfoy bears the Dark Mark: there is a Death Eater amongst them. Harry will need powerful magic and true friends as he explores Voldemort's darkest secrets, and Dumbledore prepares him to face his destiny....",
+        "thumbnail": "https://images-na.ssl-images-amazon.com/images/I/519RmXyy9EL.jpg"
+    }, {
+        "title": "Harry Potter and the Deathly Hallows",
+        "author": "JK Rowling",
+        "description": "As he climbs into the sidecar of Hagrid's motorbike and takes to the skies, leaving Privet Drive for the last time, Harry Potter knows that Lord Voldemort and the Death Eaters are not far behind. The protective charm that has kept Harry safe until now is broken, but he cannot keep hiding. The Dark Lord is breathing fear into everything Harry loves and to stop him Harry will have to find and destroy the remaining Horcruxes. The final battle must begin - Harry must stand and face his enemy ...",
+        "thumbnail": "https://m.media-amazon.com/images/I/81zsQ+gqsSL.jpg"
+    }
     ]
 }
