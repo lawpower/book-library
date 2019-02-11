@@ -2,13 +2,17 @@ import React, { Component } from 'react';
 import './App.scss';
 import Masthead from './Masthead/Masthead';
 import Library from './Library/Library';
+import DeleteModal from './Modal/DeleteModal';
+import EditModal from './Modal/EditModal';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       books: [],
-      searchQuery: ''
+      searchQuery: '',
+      bookToDelete: null,
+      bookToEdit: null
     };
   }
 
@@ -25,9 +29,29 @@ class App extends Component {
           />
           <Library 
             books={ this.state.books }
-            deleteBook={ (bookId) => this.deleteBook(bookId) }
+            deleteBook={ (book) => this.deleteBook(book) }
+            editBook={ (book) => this.editBook(book) }
             searchQuery={ this.state.searchQuery } 
           />
+          { this.state.bookToDelete &&
+            <DeleteModal 
+              class='delete'
+              book={ this.state.bookToDelete }
+              onActionClicked={ () => this.deleteBook(this.state.bookToDelete) }
+              onCancelClicked={ () => this.setState({ bookToDelete: null }) }
+            >
+          </DeleteModal>
+          }
+          { this.state.bookToEdit &&
+            <EditModal 
+              class='edit'
+              book={ this.state.bookToEdit }
+              onCancelClicked={ () => this.setState({ bookToEdit: null }) }
+              onSaveChanges={ (book) => this.editBook(book) }
+            >
+          </EditModal>
+          }
+
         </div>
       </div>
     );
@@ -43,14 +67,39 @@ class App extends Component {
       })
   }  
  
-  deleteBook(bookId) {
-    console.log(bookId);
-    // fetch(`http://localhost:3000/books/${bookId}`, {
+  deleteBook(book) {
+    if(!this.state.bookToDelete) {
+      this.setState({ bookToDelete: book });
+      return;
+    }
+
+    console.log('delete', book);
+    // fetch(`http://localhost:3000/books/${book.id}`, {
     //     method: 'delete'
     //   })
-    //   .then(() => {
-    //     this.getBooks();
-    //   })
+    // .then(() => {
+    //   this.setState({ bookToDelete: null });
+    //   this.getBooks();
+    // })
+  }  
+
+  editBook(book) {
+    if(!this.state.bookToEdit) {
+      this.setState({ bookToEdit: book });
+      return;
+    }
+
+    fetch(`http://localhost:3000/books/${book.id}`, {
+        method: 'put',
+        body: JSON.stringify(book),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+    .then(() => {
+      this.setState({ bookToEdit: null });
+      this.getBooks();
+    })
   }  
 
   findBooks(query) {

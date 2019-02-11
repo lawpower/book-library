@@ -1,0 +1,165 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &-overlay {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .2);
+    z-index: 101;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &-content {
+    width: 800px;
+    height: 600px;
+    background: #fff;
+    border: 1px solid #58585B;
+    z-index: 102;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    p {
+      padding: 0 24px 16px;
+    }
+
+    label {
+      font-size: 14px;
+
+      span {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      input {
+        width: 400px;
+        font-size: 14px;
+        padding: 4px 8px;
+      }
+
+      textarea {
+        width: 400px;
+        font-size: 14px;
+        padding: 4px 8px;
+        height: 100px;
+      }
+    }
+  }
+
+  &-header {
+    background: #fff;
+    height: 60px;
+    flex-basis: 60px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #C6C7CA;
+
+    button {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: 0;
+      border: 0;
+      cursor: pointer;
+      padding: 0;
+      margin: 0;
+      width: 24px;
+      height: 24px;
+    }
+
+    h2 {
+      font-size: 24px;
+      font-weight: normal;
+      padding: 0;
+      margin: 0;
+    }
+  }
+  &-body {
+    flex: 1;
+  }
+  &-footer {
+    height: 60px;
+    flex-basis: 60px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    box-sizing: border-box;
+    border-top: 1px solid #C6C7CA;
+
+    .buttons {      
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+  
+      li {
+        list-style: none;
+        height: 32px;
+
+        & + li {
+          margin-left: 16px;
+        }
+
+      }
+
+      button {
+        height: 32px;
+        min-width: 80px;
+        padding: 0 16px;
+        border-radius: 4px;
+        border: 0;
+        background: #ccc;
+        font-size: 14px;
+        cursor: pointer;
+
+        &.button-cta {
+          background: #004AAE;
+          color: #fff;
+
+          &:hover {
+            background: #5f5f5f;
+          }
+        }
+
+        &.button-cancel {
+          background: #C6C7CA;
+          color: #000;
+
+          &:hover {
+            background: #9E9EA2;
+          }
+        }
+
+      }
+    }
+  }
+ 
+  &.delete {
+    .modal-content {
+      width: 400px;
+      height: 300px;
+    }
+  }
+ 
+  &.edit {
+    .modal-content {
+      width: 500px;
+      height: 600px;
+    }
+  }
+
+}

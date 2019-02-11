@@ -37,7 +37,9 @@ class Library extends Component {
                 author={ book.author }  
                 description={ book.description } 
                 thumbnail={ book.thumbnail }
-                deleteBook={ () => this.props.deleteBook(book.id) }/>
+                editBook={ () => this.props.editBook(book) }
+                onSaveChanges={ () => this.props.editBook(book) }
+                deleteBook={ () => this.props.deleteBook(book) }/>
             })
           }
         </ul>
