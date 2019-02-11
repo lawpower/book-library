@@ -4,7 +4,7 @@ import './Modal.scss';
 class DeleteModal extends Component {
   render() {
     return (
-      <div className={ `modal ${ this.props.class }` }>
+      <div className='modal delete'>
         <div className='modal-overlay'>
         </div>
         <div className='modal-content'>

@@ -4,6 +4,7 @@ import Masthead from './Masthead/Masthead';
 import Library from './Library/Library';
 import DeleteModal from './Modal/DeleteModal';
 import EditModal from './Modal/EditModal';
+import AddModal from './Modal/AddModal';
 
 class App extends Component {
   constructor(props) {
@@ -12,7 +13,8 @@ class App extends Component {
       books: [],
       searchQuery: '',
       bookToDelete: null,
-      bookToEdit: null
+      bookToEdit: null,
+      addingBook: false
     };
   }
 
@@ -31,25 +33,28 @@ class App extends Component {
             books={ this.state.books }
             deleteBook={ (book) => this.deleteBook(book) }
             editBook={ (book) => this.editBook(book) }
-            searchQuery={ this.state.searchQuery } 
+            searchQuery={ this.state.searchQuery }
+            addBook={ () => this.setState({ addingBook: true })}
           />
           { this.state.bookToDelete &&
             <DeleteModal 
-              class='delete'
               book={ this.state.bookToDelete }
               onActionClicked={ () => this.deleteBook(this.state.bookToDelete) }
               onCancelClicked={ () => this.setState({ bookToDelete: null }) }
-            >
-          </DeleteModal>
+            />
           }
           { this.state.bookToEdit &&
             <EditModal 
-              class='edit'
               book={ this.state.bookToEdit }
               onCancelClicked={ () => this.setState({ bookToEdit: null }) }
               onSaveChanges={ (book) => this.editBook(book) }
-            >
-          </EditModal>
+            />
+          }
+          { this.state.addingBook &&
+            <AddModal 
+              onCancelClicked={ () => this.setState({ addingBook: false }) }
+              onSaveChanges={ (book) => this.addBook(book) }
+            />
           }
 
         </div>
@@ -74,13 +79,13 @@ class App extends Component {
     }
 
     console.log('delete', book);
-    // fetch(`http://localhost:3000/books/${book.id}`, {
-    //     method: 'delete'
-    //   })
-    // .then(() => {
-    //   this.setState({ bookToDelete: null });
-    //   this.getBooks();
-    // })
+    fetch(`http://localhost:3000/books/${book.id}`, {
+        method: 'delete'
+      })
+    .then(() => {
+      this.setState({ bookToDelete: null });
+      this.getBooks();
+    })
   }  
 
   editBook(book) {
@@ -98,6 +103,25 @@ class App extends Component {
       })
     .then(() => {
       this.setState({ bookToEdit: null });
+      this.getBooks();
+    })
+  }  
+
+  addBook(book) {
+    if(!this.state.addingBook) {
+      this.setState({ addingBook: true });
+      return;
+    }
+
+    fetch('http://localhost:3000/books/', {
+        method: 'post',
+        body: JSON.stringify(book),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+    .then(() => {
+      this.setState({ addingBook: false });
       this.getBooks();
     })
   }  

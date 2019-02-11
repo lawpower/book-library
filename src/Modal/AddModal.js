@@ -1,25 +1,25 @@
 import React, { Component } from 'react';
 import './Modal.scss';
 
-class EditModal extends Component {
+class AddModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: props.book.title,
-      author: props.book.author,
-      thumbnail: props.book.thumbnail,
-      description: props.book.description,
+      title: '',
+      author: '',
+      thumbnail: '',
+      description: '',
     };
   }
 
   render() {
     return (
-      <div className='modal edit'>
+      <div className='modal add'>
         <div className='modal-overlay'>
         </div>
         <div className='modal-content'>
           <header className='modal-header'>
-            <h2>Edit Book</h2>
+            <h2>Add Book</h2>
             <button className='modal-close' onClick={ () => this.props.onCancelClicked() }>
               <i>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
@@ -97,7 +97,6 @@ class EditModal extends Component {
 
   onSaveChanges() {
     const book = {
-      "id": this.props.book.id,
       "title": this.state.title,
       "author": this.state.author,
       "description": this.state.description,
@@ -108,4 +107,4 @@ class EditModal extends Component {
   }
 }
 
-export default EditModal;
+export default AddModal;
