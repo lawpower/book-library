@@ -5,6 +5,8 @@ import Library from './Library/Library';
 import DeleteModal from './Modal/DeleteModal';
 import EditModal from './Modal/EditModal';
 import AddModal from './Modal/AddModal';
+import LoanModal from './Modal/LoanModal';
+import ReturnModal from './Modal/ReturnModal';
 
 class App extends Component {
   constructor(props) {
@@ -14,7 +16,9 @@ class App extends Component {
       searchQuery: '',
       bookToDelete: null,
       bookToEdit: null,
-      addingBook: false
+      addingBook: false,
+      bookToLoan: null,
+      bookToReturn: null
     };
   }
 
@@ -33,6 +37,8 @@ class App extends Component {
             books={ this.state.books }
             deleteBook={ (book) => this.deleteBook(book) }
             editBook={ (book) => this.editBook(book) }
+            loanBook={ (book) => this.loanBook(book) }
+            returnBook={ (book) => this.returnBook(book) }
             searchQuery={ this.state.searchQuery }
             addBook={ () => this.setState({ addingBook: true })}
           />
@@ -54,6 +60,20 @@ class App extends Component {
             <AddModal 
               onCancelClicked={ () => this.setState({ addingBook: false }) }
               onSaveChanges={ (book) => this.addBook(book) }
+            />
+          }
+          { this.state.bookToLoan &&
+            <LoanModal 
+              book={ this.state.bookToLoan }
+              onCancelClicked={ () => this.setState({ bookToLoan: null }) }
+              onSaveChanges={ (book) => this.loanBook(book) }
+            />
+          }
+          { this.state.bookToReturn &&
+            <ReturnModal 
+              book={ this.state.bookToReturn }
+              onActionClicked={ () => this.returnBook(this.state.bookToReturn) }
+              onCancelClicked={ () => this.setState({ bookToReturn: null }) }
             />
           }
 
@@ -122,6 +142,46 @@ class App extends Component {
       })
     .then(() => {
       this.setState({ addingBook: false });
+      this.getBooks();
+    })
+  }  
+
+  loanBook(book) {
+    if(!this.state.bookToLoan) {
+      this.setState({ bookToLoan: book });
+      return;
+    }
+
+    fetch(`http://localhost:3000/books/${book.id}`, {
+        method: 'put',
+        body: JSON.stringify(book),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+    .then(() => {
+      this.setState({ bookToLoan: null });
+      this.getBooks();
+    })
+  }  
+
+  returnBook(book) {
+    if(!this.state.bookToReturn) {
+      this.setState({ bookToReturn: book });
+      return;
+    }
+
+    book.loanedTo = '';
+
+    fetch(`http://localhost:3000/books/${book.id}`, {
+        method: 'put',
+        body: JSON.stringify(book),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+    .then(() => {
+      this.setState({ bookToReturn: null });
       this.getBooks();
     })
   }  

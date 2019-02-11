@@ -3,15 +3,19 @@ import './Book.scss';
 
 class Book extends Component {
   render() {
+    const book = this.props.book;
     return (
       <li className='book'>
-        <img src={ this.props.thumbnail } alt={ this.props.title } className='book-thumbnail' />
+        <img src={ book.thumbnail } alt={ book.title } className='book-thumbnail' />
         <div className='book-name'>
-          <h2 className='book-title'>{ this.props.title }</h2>
-          <p className='book-author'>by { this.props.author }</p>
+          <h2 className='book-title'>{ book.title }</h2>
+          <p className='book-author'>by { book.author }</p>
+          { book.loanedTo &&
+            <p className='book-loaned'>Loaned to { book.loanedTo }</p>
+          }
         </div>
         <div className='book-details'>
-          <p className='book-description'>{ this.props.description }</p>
+          <p className='book-description'>{ book.description }</p>
           <ul className='book-actions'>
             <li className='book-action'>
             <button className='action' onClick={ () => this.props.editBook() }>
@@ -22,12 +26,22 @@ class Book extends Component {
               </button>
             </li>
             <li className='book-action'>
-              <button className='action'>
+             { !book.loanedTo ?
+              <button className='action' onClick={ () => this.props.loanBook() }>
                 <i>
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#004AAE" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/><path d="M0 0h24v24H0z" fill="none"/></svg>                          
                 </i>
-                <span>Loan</span>
+                  <span>Loan</span>
               </button>
+              :
+              <button className='action' onClick={ () => this.props.returnBook() } title={ `Loaned to ${ book.loanedTo }` }>
+                <i>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#004AAE" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/><path d="M0 0h24v24H0z" fill="none"/></svg>                          
+                </i>
+                  <span>Return</span>
+              </button>
+
+             }
             </li>
             <li className='book-action'>
               <button className='action' onClick={ () => this.props.deleteBook() }>

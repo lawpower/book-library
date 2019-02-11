@@ -24,12 +24,10 @@ class Library extends Component {
           { this.props.books.map((book, i) => {
               return <Book 
                 key={ i }
-                id={ book.id }
-                title={ book.title } 
-                author={ book.author }  
-                description={ book.description } 
-                thumbnail={ book.thumbnail }
+                book={ book }
                 editBook={ () => this.props.editBook(book) }
+                loanBook={ () => this.props.loanBook(book) }
+                returnBook={ () => this.props.returnBook(book) }
                 onSaveChanges={ () => this.props.editBook(book) }
                 deleteBook={ () => this.props.deleteBook(book) }/>
             })

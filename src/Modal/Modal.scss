@@ -169,4 +169,22 @@
     }
   }
 
+  &.loan {
+    .modal-content {
+      width: 400px;
+      height: 300px;
+ 
+      input {
+        width: 300px;
+      }
+    }
+  }
+
+  &.return {
+    .modal-content {
+      width: 400px;
+      height: 300px;
+    }
+  }
+
 }
