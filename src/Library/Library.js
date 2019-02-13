@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './Library.scss';
-import Book from './Book';
+import LibraryBook from './LibraryBook';
 import Search from '../Search/Search';
 
 class Library extends Component {
   render() {
     return (
       <main className='library'>
-        <p className='library-meta'>
+        <div className='library-subheader'>
           <div className='library-status'>
           { this.props.searchQuery.length > 0 ?
             <span>{ this.props.books.length } Books for the search term '{ this.props.searchQuery }'</span>
@@ -21,10 +21,10 @@ class Library extends Component {
               searchQuery={ this.props.searchQuery }
             />
           </div>
-        </p>
+        </div>
         <ul className='library-books'>
           { this.props.books.map((book, i) => {
-              return <Book 
+              return <LibraryBook 
                 key={ i }
                 book={ book }
                 editBook={ () => this.props.editBook(book) }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.scss';
 import Masthead from './Masthead/Masthead';
 import Library from './Library/Library';
@@ -33,16 +34,28 @@ class App extends Component {
           <Masthead 
             addBook={ () => this.setState({ addingBook: true })}
           />
-          <Library 
-            books={ this.state.books }
-            deleteBook={ (book) => this.deleteBook(book) }
-            editBook={ (book) => this.editBook(book) }
-            loanBook={ (book) => this.loanBook(book) }
-            returnBook={ (book) => this.returnBook(book) }
-            searchQuery={ this.state.searchQuery }
-            onSearchChanged={ (query) => this.findBooks(query) }
-          />
-          { this.state.bookToDelete &&
+          <Router>
+            <Switch>
+              <Route exact path="/" component={ () => 
+                <Library 
+                  books={ this.state.books }
+                  deleteBook={ (book) => this.deleteBook(book) }
+                  editBook={ (book) => this.editBook(book) }
+                  loanBook={ (book) => this.loanBook(book) }
+                  returnBook={ (book) => this.returnBook(book) }
+                  searchQuery={ this.state.searchQuery }
+                  onSearchChanged={ (query) => this.findBooks(query) }
+                /> }
+              />
+              <Route path="/book/:bookId" component={ ({ match }) => 
+                  <p>{ match.params.bookId }</p>
+                }
+              />
+            </Switch>
+          </Router>
+        </div>
+
+        { this.state.bookToDelete &&
             <DeleteModal 
               book={ this.state.bookToDelete }
               onActionClicked={ () => this.deleteBook(this.state.bookToDelete) }
@@ -76,12 +89,10 @@ class App extends Component {
               onCancelClicked={ () => this.setState({ bookToReturn: null }) }
             />
           }
-
-        </div>
       </div>
     );
   }
-
+  
   getBooks() {
     fetch('http://localhost:3000/books')
       .then((response) => {
@@ -98,7 +109,6 @@ class App extends Component {
       return;
     }
 
-    console.log('delete', book);
     fetch(`http://localhost:3000/books/${book.id}`, {
         method: 'delete'
       })
