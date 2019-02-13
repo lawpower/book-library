@@ -4,10 +4,16 @@
   overflow: auto;
 
   &-subheader {
-    padding: 24px;
+    padding: 12px 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    h2 {
+      font-weight: normal;
+      display: inline-block;
+      margin-right: 24px;
+    }
   }
 
   &-books {

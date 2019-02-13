@@ -36,7 +36,7 @@ class App extends Component {
           />
           <Router>
             <Switch>
-              <Route exact path="/" component={ () => 
+              <Route exact path="/" render={ () => 
                 <Library 
                   books={ this.state.books }
                   deleteBook={ (book) => this.deleteBook(book) }
@@ -47,7 +47,7 @@ class App extends Component {
                   onSearchChanged={ (query) => this.findBooks(query) }
                 /> }
               />
-              <Route path="/book/:bookId" component={ ({ match }) => 
+              <Route path="/book/:bookId" render={ ({ match }) => 
                   <p>{ match.params.bookId }</p>
                 }
               />
@@ -197,6 +197,7 @@ class App extends Component {
   }  
 
   findBooks(query) {
+    this.setState({ searchQuery: query })
     fetch(`http://localhost:3000/books?q=${query}`, {
         method: 'get'
       })
@@ -204,7 +205,7 @@ class App extends Component {
         return response.json();
       })
       .then((json) => {
-        this.setState({ books: json, searchQuery: query })
+        this.setState({ books: json })
       })
   }
 

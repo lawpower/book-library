@@ -9,11 +9,12 @@ class Library extends Component {
       <main className='library'>
         <div className='library-subheader'>
           <div className='library-status'>
-          { this.props.searchQuery.length > 0 ?
-            <span>{ this.props.books.length } Books for the search term '{ this.props.searchQuery }'</span>
-            :
-            <span>{ this.props.books.length } Books</span>
-          }
+            <h2>All Books</h2>
+            { this.props.searchQuery.length > 0 ?
+              <span>{ this.props.books.length } Books for the search term '{ this.props.searchQuery }'</span>
+              :
+              <span>{ this.props.books.length } Books</span>
+            }
           </div>
           <div className='library-search'>
             <Search 

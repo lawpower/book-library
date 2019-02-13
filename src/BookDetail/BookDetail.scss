@@ -7,7 +7,7 @@
   align-items: flex-start;
 
   &-thumbnail {
-    flex: 0 0 120px;
+    flex-basis: 120px;
     width: 120px;
     max-height: 160px;
     background: #f2f2f2;
@@ -18,7 +18,8 @@
 
   &-name {
     width: 240px;
-    flex: 0 0 240px;
+    flex-basis: 240px;
+    flex-shrink: 0;
     position: relative;
     height: 100%;
     

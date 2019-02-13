@@ -18,7 +18,7 @@ class LibraryBook extends Component {
           }
         </div>
         <div className='library-book-details'>
-          <p className='library-book-description'>{ this.getShortDescription(book.description) }</p>
+          <p className='library-book-description' title={ book.description }>{ book.description }</p>
           <ul className='library-book-actions'>
             <li>
               <Link to={`book/${ book.id}`}>
@@ -66,12 +66,6 @@ class LibraryBook extends Component {
         </div>
       </li>
     );
-  }
-
-  getShortDescription(description) {
-    const firstSplit = description.split(/[.!?]/);
-    const shortDescription = firstSplit[0] + '.';
-    return shortDescription.length > 150 ? shortDescription : shortDescription + firstSplit[1] + '.';
   }
 }
 
