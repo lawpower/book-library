@@ -31,7 +31,7 @@ class App extends Component {
       <div className='App'>
         <div className='app-wrapper'>
           <Masthead 
-            onSearchChanged={ (query) => this.findBooks(query) }
+            addBook={ () => this.setState({ addingBook: true })}
           />
           <Library 
             books={ this.state.books }
@@ -40,7 +40,7 @@ class App extends Component {
             loanBook={ (book) => this.loanBook(book) }
             returnBook={ (book) => this.returnBook(book) }
             searchQuery={ this.state.searchQuery }
-            addBook={ () => this.setState({ addingBook: true })}
+            onSearchChanged={ (query) => this.findBooks(query) }
           />
           { this.state.bookToDelete &&
             <DeleteModal 
@@ -141,7 +141,7 @@ class App extends Component {
         }
       })
     .then(() => {
-      this.setState({ addingBook: false });
+      this.setState({ addingBook: false, searchQuery: '' });
       this.getBooks();
     })
   }  

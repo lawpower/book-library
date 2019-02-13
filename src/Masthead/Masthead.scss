@@ -17,4 +17,31 @@
     font-weight: normal;
   }
 
+  button {
+    background: 0;
+    border: 0;
+    padding: 0;
+    font-size: 16px;
+    color: #004AAE;
+    display: flex;
+    align-items: center;
+    margin-right: 24px;
+    cursor: pointer;
+
+    i {
+      margin-right: 8px;
+      width: 20px;
+      height: 20px;
+    }
+
+    &:hover {
+      color: #5f5f5f;
+
+      .add-button-background {
+        fill: #5f5f5f;
+      }
+    }
+  }
+
+
 }
