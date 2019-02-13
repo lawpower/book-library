@@ -8,6 +8,7 @@ import EditModal from './Modal/EditModal';
 import AddModal from './Modal/AddModal';
 import LoanModal from './Modal/LoanModal';
 import ReturnModal from './Modal/ReturnModal';
+import BookDetail from './BookDetail/BookDetail';
 
 class App extends Component {
   constructor(props) {
@@ -48,8 +49,13 @@ class App extends Component {
                 /> }
               />
               <Route path="/book/:bookId" render={ ({ match }) => 
-                  <p>{ match.params.bookId }</p>
-                }
+                <BookDetail 
+                  bookId={ match.params.bookId }
+                  deleteBook={ (book) => this.deleteBook(book) }
+                  editBook={ (book) => this.editBook(book) }
+                  loanBook={ (book) => this.loanBook(book) }
+                  returnBook={ (book) => this.returnBook(book) }
+                /> }
               />
             </Switch>
           </Router>
@@ -102,7 +108,7 @@ class App extends Component {
         this.setState({ books: json })
       })
   }  
- 
+
   deleteBook(book) {
     if(!this.state.bookToDelete) {
       this.setState({ bookToDelete: book });
