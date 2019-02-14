@@ -15,6 +15,7 @@ class App extends Component {
     super(props);
     this.state = {
       books: [],
+      bookDetail: null,
       searchQuery: '',
       bookToDelete: null,
       bookToEdit: null,
@@ -109,39 +110,15 @@ class App extends Component {
       })
   }  
 
-  deleteBook(book) {
-    if(!this.state.bookToDelete) {
-      this.setState({ bookToDelete: book });
-      return;
-    }
-
-    fetch(`http://localhost:3000/books/${book.id}`, {
-        method: 'delete'
+  getBook(bookId) {
+    fetch(`http://localhost:3000/books/${bookId}`)
+      .then((response) => {
+        return response.json();
       })
-    .then(() => {
-      this.setState({ bookToDelete: null });
-      this.getBooks();
-    })
-  }  
-
-  editBook(book) {
-    if(!this.state.bookToEdit) {
-      this.setState({ bookToEdit: book });
-      return;
-    }
-
-    fetch(`http://localhost:3000/books/${book.id}`, {
-        method: 'put',
-        body: JSON.stringify(book),
-        headers: {
-          'Content-Type': 'application/json'
-        }
+      .then((json) => {
+        this.setState({ book: json })
       })
-    .then(() => {
-      this.setState({ bookToEdit: null });
-      this.getBooks();
-    })
-  }  
+  }    
 
   addBook(book) {
     if(!this.state.addingBook) {
@@ -158,7 +135,7 @@ class App extends Component {
       })
     .then(() => {
       this.setState({ addingBook: false, searchQuery: '' });
-      this.getBooks();
+      window.location = "/";
     })
   }  
 
@@ -177,7 +154,7 @@ class App extends Component {
       })
     .then(() => {
       this.setState({ bookToLoan: null });
-      this.getBooks();
+      window.location = "/book/" + book.id;
     })
   }  
 
@@ -199,6 +176,38 @@ class App extends Component {
     .then(() => {
       this.setState({ bookToReturn: null });
       this.getBooks();
+    })
+  }  
+  deleteBook(book) {
+    if(!this.state.bookToDelete) {
+      this.setState({ bookToDelete: book });
+      return;
+    }
+
+    fetch(`http://localhost:3000/books/${book.id}`, {
+        method: 'delete'
+      })
+    .then(() => {
+      window.location = "/";
+    })
+  }  
+
+  editBook(book) {
+    if(!this.state.bookToEdit) {
+      this.setState({ bookToEdit: book });
+      return;
+    }
+
+    fetch(`http://localhost:3000/books/${book.id}`, {
+        method: 'put',
+        body: JSON.stringify(book),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+    .then(() => {
+      this.setState({ bookToEdit: null });
+      window.location = "/book/" + book.id;
     })
   }  
 
